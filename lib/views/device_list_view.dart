@@ -20,10 +20,7 @@ class DeviceListView extends StatelessWidget {
                 child: Column(
               children: [
                 ...viewModel.devices!.map((device) => DeviceListItem(
-                    device: device,
-                    onPressed: () {
-                      viewModel.onDevicePressed(device);
-                    }))
+                    device: device, onPressed: viewModel.onDevicePressed))
               ],
             ));
           } else {

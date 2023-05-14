@@ -3,7 +3,7 @@ import '../models/device.dart';
 
 class DeviceListItem extends StatelessWidget {
   final Device device;
-  final VoidCallback onPressed;
+  final void Function(BuildContext, Device) onPressed;
 
   DeviceListItem({required this.device, required this.onPressed});
 
@@ -11,7 +11,9 @@ class DeviceListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: InkWell(
-        onTap: onPressed,
+        onTap: () {
+          onPressed(context, device);
+        },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(children: [

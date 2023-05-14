@@ -7,8 +7,8 @@ class DeviceStreamPublisher {
   final _database = FirebaseDatabase.instance.ref();
 
   Stream<List<Device>> getDeviceStream() {
-    final deviceStream = _database.child('devices').onValue;
-    final results = deviceStream.map((event) {
+    final devicesStream = _database.child('devices').onValue;
+    final results = devicesStream.map((event) {
       final deviceMap = Map<String, dynamic>.from(
           event.snapshot.value as Map<dynamic, dynamic>);
       final deviceList = deviceMap.entries.map((element) {
@@ -17,5 +17,16 @@ class DeviceStreamPublisher {
       return deviceList;
     });
     return results;
+  }
+
+  Stream<Device> getDevice(String id) {
+    final deviceStream = _database.child('devices/$id').onValue;
+    final result = deviceStream.map((event) {
+      final deviceData = Map<String, dynamic>.from(
+          event.snapshot.value as Map<dynamic, dynamic>);
+      final device = Device.fromJson(deviceData);
+      return device;
+    });
+    return result;
   }
 }
