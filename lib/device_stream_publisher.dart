@@ -7,7 +7,6 @@ class DeviceStreamPublisher {
   final _database = FirebaseDatabase.instance.ref();
 
   Stream<List<Device>> getDeviceStream() {
-    print('alarm');
     final deviceStream = _database.child('devices').onValue;
     final results = deviceStream.map((event) {
       final deviceMap = Map<String, dynamic>.from(
