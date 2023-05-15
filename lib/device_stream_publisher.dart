@@ -29,4 +29,9 @@ class DeviceStreamPublisher {
     });
     return result;
   }
+
+  void updateDevice(Device device) {
+    final id = device.id;
+    _database.child('devices/$id').update(device.toJson());
+  }
 }

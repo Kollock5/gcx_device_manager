@@ -7,7 +7,6 @@ import 'package:gcx_device_manager/viewmodels/device_detail_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../views/device_detail_view.dart';
-import '../views/device_list_view.dart';
 
 class DeviceListViewModel extends ChangeNotifier {
   List<Device>? _devices;

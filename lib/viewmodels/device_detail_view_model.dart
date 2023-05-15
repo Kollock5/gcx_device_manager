@@ -21,6 +21,22 @@ class DeviceDetailViewModel extends ChangeNotifier {
     });
   }
 
+  void onRentDevicePressed(name) {
+    if (name != null) {
+      Device myDevice = _device!;
+      myDevice.isRented = true;
+      myDevice.location = name;
+      _publisher.updateDevice(myDevice);
+    }
+  }
+
+  void onReturnDevicePressed() {
+    Device myDevice = _device!;
+    myDevice.isRented = false;
+    myDevice.location = myDevice.homeLocation;
+    _publisher.updateDevice(myDevice);
+  }
+
   @override
   void dispose() {
     _deviceStream.cancel();

@@ -65,10 +65,59 @@ class DeviceDetailScreen extends StatelessWidget {
                       'Is Rented: ${device.isRented}',
                       style: TextStyle(fontSize: 18),
                     ),
+                    if (device.isRented == false)
+                      OutlinedButton(
+                        onPressed: () async {
+                          String? name = await _showNamePromptDialog(context);
+                          if (name != null && name.isNotEmpty) {
+                            viewModel.onRentDevicePressed(name);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Enter your Name')),
+                            );
+                          }
+                        },
+                        child: Text("ausleihen"),
+                      )
+                    else
+                      OutlinedButton(
+                          onPressed: () {
+                            viewModel.onReturnDevicePressed();
+                          },
+                          child: Text("zurückgeben")),
                   ],
                 ),
               ),
             ),
+    );
+  }
+
+  Future<String?> _showNamePromptDialog(BuildContext context) async {
+    String? name;
+
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Enter your name'),
+          content: TextField(
+            onChanged: (value) {
+              name = value;
+            },
+            decoration: InputDecoration(
+              hintText: 'Name',
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, name);
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
