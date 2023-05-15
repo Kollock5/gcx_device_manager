@@ -18,7 +18,6 @@ class AddDeviceViewmodel extends ChangeNotifier {
 
   Future<void> fetchDevice() async {
     _device = await _getDeviceInfo();
-    print(_device.toString());
     notifyListeners();
   }
 
@@ -74,7 +73,6 @@ class AddDeviceViewmodel extends ChangeNotifier {
       _device!.id = x;
       _isAddDeviceButtonDisabled = !(x.length >= 8 && !x.contains(' '));
       notifyListeners();
-      print(_isAddDeviceButtonDisabled);
     }
   }
 

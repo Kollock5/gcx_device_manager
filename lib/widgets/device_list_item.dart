@@ -5,7 +5,8 @@ class DeviceListItem extends StatelessWidget {
   final Device device;
   final void Function(BuildContext, Device) onPressed;
 
-  DeviceListItem({required this.device, required this.onPressed});
+  const DeviceListItem(
+      {super.key, required this.device, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class DeviceListItem extends StatelessWidget {
               ),
               Text('Is at ${device.location}'),
             ]),
-            Spacer(),
+            const Spacer(),
             Column(
               children: [
                 Icon(getTypeIcon(device.type)),

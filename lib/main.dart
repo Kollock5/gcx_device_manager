@@ -56,10 +56,10 @@ class MyHomePage extends StatelessWidget {
                                 ChangeNotifierProvider<DeviceListViewModel>(
                                   create: (_) => DeviceListViewModel(
                                       DeviceStreamPublisher()),
-                                  child: DeviceListView(),
+                                  child: const DeviceListView(),
                                 )));
                   },
-                  child: Text("Go to Device List View")),
+                  child: const Text("Go to Device List View")),
               ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -69,10 +69,10 @@ class MyHomePage extends StatelessWidget {
                                 ChangeNotifierProvider<AddDeviceViewmodel>(
                                   create: (_) => AddDeviceViewmodel(
                                       DeviceStreamPublisher()),
-                                  child: AddDeviceView(),
+                                  child: const AddDeviceView(),
                                 )));
                   },
-                  child: Text("Go to Add Device View")),
+                  child: const Text("Go to Add Device View")),
             ],
           ),
         ));

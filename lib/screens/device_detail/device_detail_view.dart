@@ -7,7 +7,7 @@ import 'device_detail_view_model.dart';
 class DeviceDetailScreen extends StatelessWidget {
   final String deviceId;
 
-  DeviceDetailScreen({required this.deviceId});
+  const DeviceDetailScreen({super.key, required this.deviceId});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class DeviceDetailScreen extends StatelessWidget {
         title: Text(device?.name ?? 'Device Detail'),
       ),
       body: device == null
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -28,63 +28,64 @@ class DeviceDetailScreen extends StatelessWidget {
                   children: [
                     Text(
                       'ID: ${device.id}',
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
-                    SizedBox(height: 8),
                     Text(
                       'Name: ${device.name}',
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       'Model: ${device.model}',
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       'System Version: ${device.systemVersion}',
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       'Type: ${device.type}',
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       'Location: ${device.location}',
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       'Home Location: ${device.homeLocation}',
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       'Is Rented: ${device.isRented}',
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
                     if (device.isRented == false)
                       OutlinedButton(
                         onPressed: () async {
+                          final scaffoldMessenger =
+                              ScaffoldMessenger.of(context);
                           String? name = await _showNamePromptDialog(context);
                           if (name != null && name.isNotEmpty) {
                             viewmodel.onRentDevicePressed(name);
                           } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Enter your Name')),
+                            scaffoldMessenger.showSnackBar(
+                              const SnackBar(content: Text('Enter your Name')),
                             );
                           }
                         },
-                        child: Text("ausleihen"),
+                        child: const Text("rent"),
                       )
                     else
                       OutlinedButton(
                           onPressed: () {
                             viewmodel.onReturnDevicePressed();
                           },
-                          child: Text("zurückgeben")),
+                          child: const Text("return")),
                   ],
                 ),
               ),
@@ -99,12 +100,12 @@ class DeviceDetailScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Enter your name'),
+          title: const Text('Enter your name'),
           content: TextField(
             onChanged: (value) {
               name = value;
             },
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Name',
             ),
           ),
@@ -113,7 +114,7 @@ class DeviceDetailScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context, name);
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );

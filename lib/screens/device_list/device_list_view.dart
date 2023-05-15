@@ -3,19 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:gcx_device_manager/screens/device_list/device_list_viewmodel.dart';
 import 'package:provider/provider.dart';
 
-import '../../widgets/device_liste_item.dart';
+import '../../widgets/device_list_item.dart';
 
 class DeviceListView extends StatelessWidget {
+  const DeviceListView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Devices List'),
+        title: const Text('Devices List'),
       ),
       body: Consumer<DeviceListViewModel>(
         builder: (context, viewmodel, child) {
           if (viewmodel.devices != null) {
-            print(viewmodel.devices.toString());
             return SingleChildScrollView(
                 child: Column(
               children: [
@@ -24,7 +25,7 @@ class DeviceListView extends StatelessWidget {
               ],
             ));
           } else {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
         },
       ),

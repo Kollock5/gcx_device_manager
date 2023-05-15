@@ -26,7 +26,6 @@ class DeviceListViewModel extends ChangeNotifier {
   }
 
   void onDevicePressed(BuildContext context, Device device) {
-    print('Device pressed: ${device.name}');
     Navigator.push(
       context,
       MaterialPageRoute(
