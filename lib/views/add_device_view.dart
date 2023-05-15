@@ -29,28 +29,21 @@ class _AddDeviceViewState extends State<AddDeviceView> {
                 padding: EdgeInsets.all(16.0),
                 children: <Widget>[
                   TextFormField(
-                    initialValue: viewModel.device?.name,
-                    decoration: InputDecoration(labelText: 'Device Name'),
-                    onSaved: (value) {
-                      // Save this to the device model
-                      viewModel.device?.name = value ?? '';
-                    },
+                    initialValue: viewModel.device?.id,
+                    decoration: InputDecoration(
+                        labelText: 'Device Id',
+                        hintText: 'No Spaces and at least 8 characters'),
+                    onChanged: (value) => viewModel.setId(value),
                   ),
                   TextFormField(
-                    initialValue: viewModel.device?.id,
-                    decoration: InputDecoration(labelText: 'Device Id'),
-                    onSaved: (value) {
-                      // Save this to the device model
-                      viewModel.device?.id = value ?? '';
-                    },
+                    initialValue: viewModel.device?.name,
+                    decoration: InputDecoration(labelText: 'Device Name'),
+                    onChanged: (value) => viewModel.setName(value),
                   ),
                   TextFormField(
                     initialValue: viewModel.device?.homeLocation,
                     decoration: InputDecoration(labelText: 'Home Location'),
-                    onSaved: (value) {
-                      // Save this to the device model
-                      viewModel.device?.homeLocation = value ?? '';
-                    },
+                    onChanged: (value) => viewModel.setHomeLocation(value),
                   ),
                   Text('Model: ${viewModel.device?.model ?? ''}'),
                   Text(
@@ -59,13 +52,9 @@ class _AddDeviceViewState extends State<AddDeviceView> {
                   // Add more fields here for the device
                   ElevatedButton(
                     child: Text('Save Device'),
-                    onPressed: () {
-                      if (_formKey.currentState?.validate() == true) {
-                        _formKey.currentState?.save();
-                        // Here you can call viewModel.addDeviceToServer()
-                        // Or any other action after saving the form
-                      }
-                    },
+                    onPressed: viewModel.isAddDeviceButtonDisabled
+                        ? null
+                        : () => viewModel.onAddDevicePressed(context),
                   ),
                 ],
               ),

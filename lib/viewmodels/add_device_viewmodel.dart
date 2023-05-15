@@ -9,6 +9,7 @@ import 'package:gcx_device_manager/device_stream_publisher.dart';
 class AddDeviceViewmodel extends ChangeNotifier {
   final DeviceStreamPublisher _publisher;
   Device? _device;
+  bool _isAddDeviceButtonDisabled = true;
 
   AddDeviceViewmodel(this._publisher) {
     _getDeviceInfo();
@@ -59,4 +60,33 @@ class AddDeviceViewmodel extends ChangeNotifier {
   void addDeviceToServer() {}
 
   Device? get device => _device;
+  bool get isAddDeviceButtonDisabled => _isAddDeviceButtonDisabled;
+
+  void onAddDevicePressed(BuildContext context) {
+    if (_device != null) {
+      _publisher.updateDevice(_device!);
+      Navigator.pop(context);
+    }
+  }
+
+  void setId(String? x) {
+    if (x != null) {
+      _device!.id = x;
+      _isAddDeviceButtonDisabled = !(x.length >= 8 && !x.contains(' '));
+      notifyListeners();
+      print(_isAddDeviceButtonDisabled);
+    }
+  }
+
+  void setHomeLocation(String? x) {
+    if (x != null) {
+      _device!.homeLocation = x;
+    }
+  }
+
+  void setName(String? x) {
+    if (x != null) {
+      _device!.name = x;
+    }
+  }
 }
