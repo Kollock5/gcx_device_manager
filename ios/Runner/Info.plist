@@ -13,11 +13,6 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-    	<key>NSAllowsLocalNetworking</key>
-    	<true/>
-	</dict>
 	<string>gcx_device_manager</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>

@@ -38,6 +38,7 @@ dependencies:
   firebase_database: ^10.2.0
   provider: ^6.0.5
   firebase_core: ^2.12.0
+  device_info_plus: ^9.0.0
 
 dev_dependencies:
   flutter_test:
