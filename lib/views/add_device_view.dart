@@ -36,6 +36,26 @@ class _AddDeviceViewState extends State<AddDeviceView> {
                       viewModel.device?.name = value ?? '';
                     },
                   ),
+                  TextFormField(
+                    initialValue: viewModel.device?.id,
+                    decoration: InputDecoration(labelText: 'Device Id'),
+                    onSaved: (value) {
+                      // Save this to the device model
+                      viewModel.device?.id = value ?? '';
+                    },
+                  ),
+                  TextFormField(
+                    initialValue: viewModel.device?.homeLocation,
+                    decoration: InputDecoration(labelText: 'Home Location'),
+                    onSaved: (value) {
+                      // Save this to the device model
+                      viewModel.device?.homeLocation = value ?? '';
+                    },
+                  ),
+                  Text('Model: ${viewModel.device?.model ?? ''}'),
+                  Text(
+                      'System Version: ${viewModel.device?.systemVersion ?? ''}'),
+                  Text('Type: ${viewModel.device?.type ?? ''}'),
                   // Add more fields here for the device
                   ElevatedButton(
                     child: Text('Save Device'),

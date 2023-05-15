@@ -10,8 +10,8 @@ class Device {
   bool? isRented;
 
   Device({
-    required this.id, //QR
-    required this.name, //
+    required this.id,
+    required this.name,
     required this.model,
     required this.systemVersion,
     required this.type,
