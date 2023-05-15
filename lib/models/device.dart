@@ -22,13 +22,13 @@ class Device {
 
   factory Device.fromJson(Map<String, dynamic> json) {
     return Device(
-      id: json['id'].toString() as String? ?? 'Unknown',
-      name: json['name'].toString() as String? ?? 'Unknown',
-      model: json['model'].toString() as String? ?? 'Unknown',
-      systemVersion: json['systemVersion'].toString() as String? ?? 'Unknown',
-      type: json['type'].toString() as String?,
-      location: json['location'].toString() as String? ?? 'Unknown',
-      homeLocation: json['homeLocation'].toString() as String? ?? 'Not Set',
+      id: json['id'].toString(),
+      name: json['name'].toString(),
+      model: json['model'].toString(),
+      systemVersion: json['systemVersion'].toString(),
+      type: json['type'].toString(),
+      location: json['location'].toString(),
+      homeLocation: json['homeLocation'].toString(),
       isRented: json['isRented'] as bool?,
     );
   }

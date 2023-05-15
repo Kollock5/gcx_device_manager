@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gcx_device_manager/device_stream_publisher.dart';
-import 'package:gcx_device_manager/viewmodels/device_list_viewmodel.dart';
-import 'package:gcx_device_manager/views/device_list_view.dart';
-import 'package:gcx_device_manager/views/add_device_view.dart';
-import 'package:gcx_device_manager/viewmodels/add_device_viewmodel.dart';
+import 'package:gcx_device_manager/screens/device_list/device_list_viewmodel.dart';
+import 'package:gcx_device_manager/screens/device_list/device_list_view.dart';
+import 'package:gcx_device_manager/screens/add_device/add_device_view.dart';
+import 'package:gcx_device_manager/screens/add_device/add_device_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';

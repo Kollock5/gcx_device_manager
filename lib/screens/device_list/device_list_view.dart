@@ -1,9 +1,9 @@
 // views/device_list_screen.dart
 import 'package:flutter/material.dart';
-import 'package:gcx_device_manager/viewmodels/device_list_viewmodel.dart';
+import 'package:gcx_device_manager/screens/device_list/device_list_viewmodel.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/device_liste_item.dart';
+import '../../widgets/device_liste_item.dart';
 
 class DeviceListView extends StatelessWidget {
   @override
@@ -13,14 +13,14 @@ class DeviceListView extends StatelessWidget {
         title: Text('Devices List'),
       ),
       body: Consumer<DeviceListViewModel>(
-        builder: (context, viewModel, child) {
-          if (viewModel.devices != null) {
-            print(viewModel.devices.toString());
+        builder: (context, viewmodel, child) {
+          if (viewmodel.devices != null) {
+            print(viewmodel.devices.toString());
             return SingleChildScrollView(
                 child: Column(
               children: [
-                ...viewModel.devices!.map((device) => DeviceListItem(
-                    device: device, onPressed: viewModel.onDevicePressed))
+                ...viewmodel.devices!.map((device) => DeviceListItem(
+                    device: device, onPressed: viewmodel.onDevicePressed))
               ],
             ));
           } else {

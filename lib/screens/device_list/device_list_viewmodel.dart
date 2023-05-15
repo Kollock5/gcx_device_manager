@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gcx_device_manager/models/device.dart';
 import 'package:gcx_device_manager/device_stream_publisher.dart';
-import 'package:gcx_device_manager/viewmodels/device_detail_view_model.dart';
+import 'package:gcx_device_manager/screens/device_detail/device_detail_view_model.dart';
 import 'package:provider/provider.dart';
 
-import '../views/device_detail_view.dart';
+import '../device_detail/device_detail_view.dart';
 
 class DeviceListViewModel extends ChangeNotifier {
   List<Device>? _devices;

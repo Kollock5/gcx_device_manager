@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/device.dart';
-import '../viewmodels/device_detail_view_model.dart';
+import '../../models/device.dart';
+import 'device_detail_view_model.dart';
 
 class DeviceDetailScreen extends StatelessWidget {
   final String deviceId;
@@ -11,8 +11,8 @@ class DeviceDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<DeviceDetailViewModel>(context);
-    Device? device = viewModel.device;
+    final viewmodel = Provider.of<DeviceDetailViewModel>(context);
+    Device? device = viewmodel.device;
 
     return Scaffold(
       appBar: AppBar(
@@ -70,7 +70,7 @@ class DeviceDetailScreen extends StatelessWidget {
                         onPressed: () async {
                           String? name = await _showNamePromptDialog(context);
                           if (name != null && name.isNotEmpty) {
-                            viewModel.onRentDevicePressed(name);
+                            viewmodel.onRentDevicePressed(name);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('Enter your Name')),
@@ -82,7 +82,7 @@ class DeviceDetailScreen extends StatelessWidget {
                     else
                       OutlinedButton(
                           onPressed: () {
-                            viewModel.onReturnDevicePressed();
+                            viewmodel.onReturnDevicePressed();
                           },
                           child: Text("zurückgeben")),
                   ],
