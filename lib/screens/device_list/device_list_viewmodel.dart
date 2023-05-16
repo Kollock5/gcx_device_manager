@@ -3,10 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gcx_device_manager/models/device.dart';
 import 'package:gcx_device_manager/device_stream_publisher.dart';
-import 'package:gcx_device_manager/screens/device_detail/device_detail_view_model.dart';
-import 'package:provider/provider.dart';
-
-import '../device_detail/device_detail_view.dart';
 
 class DeviceListViewModel extends ChangeNotifier {
   List<Device>? _devices;
@@ -26,14 +22,10 @@ class DeviceListViewModel extends ChangeNotifier {
   }
 
   void onDevicePressed(BuildContext context, Device device) {
-    Navigator.push(
+    Navigator.pushNamed(
       context,
-      MaterialPageRoute(
-        builder: (context) => ChangeNotifierProvider<DeviceDetailViewModel>(
-          create: (_) => DeviceDetailViewModel(_publisher, device.id),
-          child: DeviceDetailScreen(deviceId: device.id),
-        ),
-      ),
+      '/deviceDetailScreen',
+      arguments: device.id,
     );
   }
 
