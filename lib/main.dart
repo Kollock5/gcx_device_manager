@@ -5,6 +5,8 @@ import 'package:gcx_device_manager/screens/device_list/device_list_viewmodel.dar
 import 'package:gcx_device_manager/screens/device_list/device_list_view.dart';
 import 'package:gcx_device_manager/screens/add_device/add_device_view.dart';
 import 'package:gcx_device_manager/screens/add_device/add_device_viewmodel.dart';
+import 'package:gcx_device_manager/screens/qr_scanner/qr_scanner_view.dart';
+import 'package:gcx_device_manager/screens/qr_scanner/qr_scanner_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -73,6 +75,18 @@ class MyHomePage extends StatelessWidget {
                                 )));
                   },
                   child: const Text("Go to Add Device View")),
+              // ElevatedButton(
+              //     onPressed: () {
+              //       Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //               builder: (context) =>
+              //                   ChangeNotifierProvider<QrScannerViewmodel>(
+              //                     create: (_) => QrScannerViewmodel(),
+              //                     child: QrScannerScreen(),
+              //                   )));
+              //     },
+              //     child: const Text("Go to Scanner")),
             ],
           ),
         ));

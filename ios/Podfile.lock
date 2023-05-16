@@ -30,12 +30,19 @@ PODS:
   - "GoogleUtilities/NSData+zlib (7.11.1)"
   - leveldb-library (1.22.2)
   - PromisesObjC (2.2.0)
+  - scan (0.0.1):
+    - Flutter
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
 
 DEPENDENCIES:
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_database (from `.symlinks/plugins/firebase_database/ios`)
   - Flutter (from `Flutter`)
+  - scan (from `.symlinks/plugins/scan/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
 
 SPEC REPOS:
   trunk:
@@ -56,6 +63,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_database/ios"
   Flutter:
     :path: Flutter
+  scan:
+    :path: ".symlinks/plugins/scan/ios"
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
 
 SPEC CHECKSUMS:
   device_info_plus: 7545d84d8d1b896cb16a4ff98c19f07ec4b298ea
@@ -69,6 +80,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
+  scan: aea35bb4aa59ccc8839c576a18cd57c7d492cc86
+  shared_preferences_foundation: e2dae3258e06f44cc55f49d42024fd8dd03c590c
 
 PODFILE CHECKSUM: 70d9d25280d0dd177a5f637cdb0f0b0b12c6a189
 
