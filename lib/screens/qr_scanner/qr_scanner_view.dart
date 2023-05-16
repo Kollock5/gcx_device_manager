@@ -20,7 +20,7 @@ class QrScannerScreen extends StatelessWidget {
         // fit: BoxFit.contain,
         controller: MobileScannerController(
           detectionSpeed: DetectionSpeed.normal,
-          facing: CameraFacing.front,
+          facing: CameraFacing.back,
           torchEnabled: true,
         ),
         onDetect: (capture) {
