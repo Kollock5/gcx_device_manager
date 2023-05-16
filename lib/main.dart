@@ -75,18 +75,18 @@ class MyHomePage extends StatelessWidget {
                                 )));
                   },
                   child: const Text("Go to Add Device View")),
-              // ElevatedButton(
-              //     onPressed: () {
-              //       Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //               builder: (context) =>
-              //                   ChangeNotifierProvider<QrScannerViewmodel>(
-              //                     create: (_) => QrScannerViewmodel(),
-              //                     child: QrScannerScreen(),
-              //                   )));
-              //     },
-              //     child: const Text("Go to Scanner")),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ChangeNotifierProvider<QrScannerViewmodel>(
+                                  create: (_) => QrScannerViewmodel(),
+                                  child: QrScannerScreen(),
+                                )));
+                  },
+                  child: const Text("Go to Scanner")),
             ],
           ),
         ));
