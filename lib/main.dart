@@ -1,11 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:gcx_device_manager/read.dart';
-import 'package:gcx_device_manager/write.dart';
+import 'package:gcx_device_manager/device_stream_publisher.dart';
+import 'package:gcx_device_manager/screens/device_list/device_list_viewmodel.dart';
+import 'package:gcx_device_manager/screens/device_list/device_list_view.dart';
+import 'package:gcx_device_manager/screens/add_device/add_device_view.dart';
+import 'package:gcx_device_manager/screens/add_device/add_device_viewmodel.dart';
+import 'package:gcx_device_manager/screens/qr_scanner/qr_scanner_view.dart';
+import 'package:gcx_device_manager/screens/qr_scanner/qr_scanner_viewmodel.dart';
+import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -45,18 +51,42 @@ class MyHomePage extends StatelessWidget {
             children: [
               ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ReadExample()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ChangeNotifierProvider<DeviceListViewModel>(
+                                  create: (_) => DeviceListViewModel(
+                                      DeviceStreamPublisher()),
+                                  child: const DeviceListView(),
+                                )));
                   },
-                  child: Text("Read")),
+                  child: const Text("Go to Device List View")),
               ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => WriteExample()));
+                            builder: (context) =>
+                                ChangeNotifierProvider<AddDeviceViewmodel>(
+                                  create: (_) => AddDeviceViewmodel(
+                                      DeviceStreamPublisher()),
+                                  child: const AddDeviceView(),
+                                )));
                   },
-                  child: Text("Write"))
+                  child: const Text("Go to Add Device View")),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ChangeNotifierProvider<QrScannerViewmodel>(
+                                  create: (_) => QrScannerViewmodel(),
+                                  child: QrScannerScreen(),
+                                )));
+                  },
+                  child: const Text("Go to Scanner")),
             ],
           ),
         ));

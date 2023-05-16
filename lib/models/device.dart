@@ -4,7 +4,7 @@ class Device {
   String name;
   String model;
   String systemVersion;
-  String type;
+  String? type;
   String location;
   String homeLocation;
   bool? isRented;
@@ -22,13 +22,13 @@ class Device {
 
   factory Device.fromJson(Map<String, dynamic> json) {
     return Device(
-      id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
-      model: json['model'] as String? ?? '',
-      systemVersion: json['systemVersion'] as String? ?? '',
-      type: json['type'] as String? ?? '',
-      location: json['location'] as String? ?? '',
-      homeLocation: json['homeLocation'] as String? ?? '',
+      id: json['id'].toString(),
+      name: json['name'].toString(),
+      model: json['model'].toString(),
+      systemVersion: json['systemVersion'].toString(),
+      type: json['type'].toString(),
+      location: json['location'].toString(),
+      homeLocation: json['homeLocation'].toString(),
       isRented: json['isRented'] as bool?,
     );
   }
