@@ -17,11 +17,10 @@ class QrScannerScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: MobileScanner(
-        // fit: BoxFit.contain,
+        // fit: BoxFit.contain,8
         controller: MobileScannerController(
           detectionSpeed: DetectionSpeed.normal,
           facing: CameraFacing.back,
-          torchEnabled: true,
         ),
         onDetect: (capture) {
           final List<Barcode> barcodes = capture.barcodes;
