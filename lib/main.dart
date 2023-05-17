@@ -9,6 +9,8 @@ import 'package:gcx_device_manager/screens/add_device/add_device_view.dart';
 import 'package:gcx_device_manager/screens/add_device/add_device_viewmodel.dart';
 import 'package:gcx_device_manager/screens/qr_scanner/qr_scanner_view.dart';
 import 'package:gcx_device_manager/screens/qr_scanner/qr_scanner_viewmodel.dart';
+import 'package:gcx_device_manager/screens/settings/settings_view.dart';
+import 'package:gcx_device_manager/screens/settings/settings_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -18,7 +20,9 @@ Future<void> main() async {
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -44,8 +48,10 @@ class MyApp extends StatelessWidget {
           final String deviceId =
               ModalRoute.of(context)!.settings.arguments as String;
           return ChangeNotifierProvider<DeviceDetailViewModel>(
-            create: (_) =>
-                DeviceDetailViewModel(DeviceStreamPublisher(), deviceId),
+            create: (_) => DeviceDetailViewModel(
+              DeviceStreamPublisher(),
+              deviceId,
+            ),
             child: DeviceDetailScreen(deviceId: deviceId),
           );
         },
@@ -59,7 +65,10 @@ class MyApp extends StatelessWidget {
               create: (_) => QrScannerViewmodel(),
               child: const QrScannerScreen(),
             ),
-        // Add more routes as needed
+        '/settings': (context) => ChangeNotifierProvider<SettingsViewmodel>(
+              create: (_) => SettingsViewmodel(DeviceStreamPublisher()),
+              child: const SettingsScreen(),
+            ),
       },
     );
   }
@@ -92,6 +101,11 @@ class MyHomePage extends StatelessWidget {
                     Navigator.pushNamed(context, '/qrScannerView');
                   },
                   child: const Text("Go to Scanner")),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/settings');
+                  },
+                  child: const Text("Settings")),
             ],
           ),
         ));

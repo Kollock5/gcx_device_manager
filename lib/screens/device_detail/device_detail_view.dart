@@ -67,15 +67,13 @@ class DeviceDetailScreen extends StatelessWidget {
                     if (device.isRented == false)
                       OutlinedButton(
                         onPressed: () async {
-                          final scaffoldMessenger =
-                              ScaffoldMessenger.of(context);
-                          String? name = await _showNamePromptDialog(context);
-                          if (name != null && name.isNotEmpty) {
-                            viewmodel.onRentDevicePressed(name);
+                          if (viewmodel.hasDefaultName) {
+                            viewmodel
+                                .onRentDevicePressed(viewmodel.defaultName);
                           } else {
-                            scaffoldMessenger.showSnackBar(
-                              const SnackBar(content: Text('Enter your Name')),
-                            );
+                            ScaffoldMessenger.of(context);
+                            String? name = await _showNamePromptDialog(context);
+                            viewmodel.onRentDevicePressed(name);
                           }
                         },
                         child: const Text("rent"),

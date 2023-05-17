@@ -3,18 +3,33 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gcx_device_manager/models/device.dart';
 import 'package:gcx_device_manager/device_stream_publisher.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:provider/provider.dart';
 
 class DeviceDetailViewModel extends ChangeNotifier {
   final String deviceId;
   final DeviceStreamPublisher _publisher;
   Device? _device;
   late StreamSubscription<Device?> _deviceStream;
+  bool hasDefaultName = false;
+  late String? _defaultName;
 
   DeviceDetailViewModel(this._publisher, this.deviceId) {
     _listenToDevice();
+    _getDefaultName();
+  }
+
+  Future<void> _getDefaultName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _defaultName = prefs.getString('defaultName');
+    if (_defaultName != null) {
+      hasDefaultName = true;
+    }
+    notifyListeners();
   }
 
   void _listenToDevice() {
+    print("steam");
     _deviceStream = _publisher.getDevice(deviceId).listen((device) {
       _device = device;
       notifyListeners();
@@ -23,7 +38,7 @@ class DeviceDetailViewModel extends ChangeNotifier {
 
   void onRentDevicePressed(name) {
     if (name != null) {
-      Device myDevice = _device!;
+      Device myDevice = _device!.copy();
       myDevice.isRented = true;
       myDevice.location = name;
       _publisher.updateDevice(myDevice);
@@ -44,4 +59,5 @@ class DeviceDetailViewModel extends ChangeNotifier {
   }
 
   Device? get device => _device;
+  String? get defaultName => _defaultName;
 }
