@@ -19,15 +19,24 @@ class DeviceStreamPublisher {
     return results;
   }
 
-  Stream<Device> getDevice(String id) {
+  Stream<Device?> getDevice(String id) {
     final deviceStream = _database.child('devices/$id').onValue;
     final result = deviceStream.map((event) {
-      final deviceData = Map<String, dynamic>.from(
-          event.snapshot.value as Map<dynamic, dynamic>);
-      final device = Device.fromJson(deviceData);
-      return device;
+      if (event.snapshot.value != null) {
+        final deviceData = Map<String, dynamic>.from(
+            event.snapshot.value as Map<dynamic, dynamic>);
+        final device = Device.fromJson(deviceData);
+        return device;
+      } else {
+        return null;
+      }
     });
     return result;
+  }
+
+  void deleteDevice(Device device) {
+    final id = device.id;
+    _database.child('devices/$id').remove();
   }
 
   void updateDevice(Device device) {

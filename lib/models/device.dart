@@ -45,4 +45,42 @@ class Device {
       'isRented': isRented,
     };
   }
+
+  Device copy() {
+    return Device(
+      id: id,
+      name: name,
+      model: model,
+      systemVersion: systemVersion,
+      type: type,
+      location: location,
+      homeLocation: homeLocation,
+      isRented: isRented,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is Device &&
+        other.id == id &&
+        other.name == name &&
+        other.model == model &&
+        other.systemVersion == systemVersion &&
+        other.type == type &&
+        other.location == location &&
+        other.homeLocation == homeLocation &&
+        other.isRented == isRented;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        name.hashCode ^
+        model.hashCode ^
+        systemVersion.hashCode ^
+        (type?.hashCode ?? 0) ^
+        location.hashCode ^
+        homeLocation.hashCode ^
+        (isRented?.hashCode ?? 0);
+  }
 }
