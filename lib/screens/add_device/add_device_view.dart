@@ -32,10 +32,20 @@ class AddDeviceViewState extends State<AddDeviceView> {
                 children: <Widget>[
                   TextFormField(
                     initialValue: viewmodel.device?.id,
-                    decoration: const InputDecoration(
-                        labelText: 'Device Id',
-                        hintText: 'No Spaces and at least 8 characters'),
-                    onChanged: (value) => viewmodel.setId(value),
+                    decoration: const InputDecoration(labelText: 'Device Id'),
+                    onChanged: (value) {
+                      if (_formKey.currentState!.validate()) {}
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some text';
+                      } else if (value.contains(RegExp(r'[.#$\[\]]'))) {
+                        return 'Do not use . # \$ [ or ]';
+                      } else {
+                        viewmodel.setId(value);
+                      }
+                      return null;
+                    },
                   ),
                   TextFormField(
                     initialValue: viewmodel.device?.name,
@@ -52,7 +62,6 @@ class AddDeviceViewState extends State<AddDeviceView> {
                   Text(
                       'System Version: ${viewmodel.device?.systemVersion ?? ''}'),
                   Text('Type: ${viewmodel.device?.type ?? ''}'),
-                  // Add more fields here for the device
                   ElevatedButton(
                     onPressed: viewmodel.isAddDeviceButtonDisabled
                         ? null
