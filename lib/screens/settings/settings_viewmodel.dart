@@ -19,7 +19,6 @@ class SettingsViewmodel extends ChangeNotifier {
 
   SettingsViewmodel(this._publisher) {
     readData();
-    print(_defaultName);
   }
 
   void _listenToDevice() {
@@ -118,6 +117,13 @@ class SettingsViewmodel extends ChangeNotifier {
       notifyListeners();
       checkIfChanged();
     }
+  }
+
+  void onAddDevicePressed(context) {
+    Navigator.pushNamed(
+      context,
+      '/addDeviceView',
+    );
   }
 
   Device? get device => _device;

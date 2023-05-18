@@ -17,7 +17,7 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const MyHomePage(),
+        '/': (context) => MyHomePage(),
         '/deviceListView': (context) =>
             ChangeNotifierProvider<DeviceListViewModel>(
               create: (_) => DeviceListViewModel(DeviceStreamPublisher()),
@@ -75,39 +75,48 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
         appBar: AppBar(
           title: const Text("GCX device manager"),
-        ),
-        body: Center(
-          child: Column(
-            children: [
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/deviceListView');
-                  },
-                  child: const Text("Go to Device List View")),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/addDeviceView');
-                  },
-                  child: const Text("Go to Add Device View")),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/qrScannerView');
-                  },
-                  child: const Text("Go to Scanner")),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/settings');
-                  },
-                  child: const Text("Settings")),
+          bottom: const TabBar(
+            tabs: [
+              Tab(icon: Icon(Icons.list)),
+              Tab(icon: Icon(Icons.info)),
+              Tab(icon: Icon(Icons.camera)),
+              Tab(icon: Icon(Icons.settings)),
             ],
           ),
-        ));
+        ),
+        body: TabBarView(
+          children: [
+            ChangeNotifierProvider<DeviceListViewModel>(
+              create: (_) => DeviceListViewModel(DeviceStreamPublisher()),
+              child: const DeviceListView(),
+            ),
+            ChangeNotifierProvider<DeviceDetailViewModel>(
+              create: (_) => DeviceDetailViewModel(
+                DeviceStreamPublisher(),
+                null,
+              ),
+              child: const DeviceDetailScreen(deviceId: null),
+            ),
+            ChangeNotifierProvider<QrScannerViewmodel>(
+              create: (_) => QrScannerViewmodel(DeviceStreamPublisher()),
+              child: const QrScannerScreen(),
+            ),
+            ChangeNotifierProvider<SettingsViewmodel>(
+              create: (_) => SettingsViewmodel(DeviceStreamPublisher()),
+              child: const SettingsScreen(),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

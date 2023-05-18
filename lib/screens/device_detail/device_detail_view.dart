@@ -5,7 +5,7 @@ import '../../models/device.dart';
 import 'device_detail_view_model.dart';
 
 class DeviceDetailScreen extends StatelessWidget {
-  final String deviceId;
+  final String? deviceId;
 
   const DeviceDetailScreen({super.key, required this.deviceId});
 
@@ -16,10 +16,19 @@ class DeviceDetailScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(device?.name ?? 'Device Detail'),
+        title: Text(device?.name ?? 'This Device'),
       ),
       body: device == null
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(
+              child: viewmodel.deviceId != ''
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const CircularProgressIndicator(),
+                        Text("Trying to load ID: ${viewmodel.deviceId}"),
+                      ],
+                    )
+                  : const Text('This Device is not in the Rental Server'))
           : SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),

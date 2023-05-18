@@ -23,7 +23,9 @@ class SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     final viewmodel = Provider.of<SettingsViewmodel>(context);
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: const Text('Settings'),
+        ),
         body: SingleChildScrollView(
           child: viewmodel.settingsReady
               ? SettingLoaded(formKey: _formKey, viewmodel: viewmodel)
@@ -56,7 +58,10 @@ class SettingLoaded extends StatelessWidget {
         LocalSettings(viewmodel: viewmodel, formKey: _formKey),
         viewmodel.device != null
             ? DeviceSettings(viewmodel: viewmodel, formKey: _formKey)
-            : const Text('No device with this ID found.')
+            : ElevatedButton(
+                onPressed: () => viewmodel.onAddDevicePressed(context),
+                child: const Text('Add this Device'),
+              ),
       ]),
     );
   }

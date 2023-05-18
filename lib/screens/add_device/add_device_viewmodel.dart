@@ -30,7 +30,7 @@ class AddDeviceViewmodel extends ChangeNotifier {
       var manufacturer = androidInfo.manufacturer;
       var model = androidInfo.model;
       return Device(
-          id: "Add Id",
+          id: "",
           name: "$manufacturer, $model",
           model: model,
           systemVersion: "Android $release (SDK $sdkInt)",
@@ -44,7 +44,7 @@ class AddDeviceViewmodel extends ChangeNotifier {
       var version = iosInfo.systemVersion;
       var name = iosInfo.name;
       return Device(
-          id: "Add Id",
+          id: "",
           name: name,
           model: name,
           systemVersion: "$systemName $version",

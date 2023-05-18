@@ -7,15 +7,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:provider/provider.dart';
 
 class DeviceDetailViewModel extends ChangeNotifier {
-  final String deviceId;
+  String? deviceId;
   final DeviceStreamPublisher _publisher;
   Device? _device;
-  late StreamSubscription<Device?> _deviceStream;
+  StreamSubscription<Device?>? _deviceStream;
   bool hasDefaultName = false;
   late String? _defaultName;
 
   DeviceDetailViewModel(this._publisher, this.deviceId) {
-    _listenToDevice();
+    if (deviceId == null) {
+      _getIdFromLocalData();
+    } else {
+      _listenToDevice();
+    }
     _getDefaultName();
   }
 
@@ -28,12 +32,22 @@ class DeviceDetailViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> _getIdFromLocalData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    deviceId = prefs.getString('savedId');
+    if (deviceId != null && deviceId != '') {
+      _listenToDevice();
+    }
+  }
+
   void _listenToDevice() {
     print("steam");
-    _deviceStream = _publisher.getDevice(deviceId).listen((device) {
-      _device = device;
-      notifyListeners();
-    });
+    if (deviceId != null) {
+      _deviceStream = _publisher.getDevice(deviceId!).listen((device) {
+        _device = device;
+        notifyListeners();
+      });
+    }
   }
 
   void onRentDevicePressed(name) {
@@ -54,7 +68,9 @@ class DeviceDetailViewModel extends ChangeNotifier {
 
   @override
   void dispose() {
-    _deviceStream.cancel();
+    if (_deviceStream != null) {
+      _deviceStream!.cancel();
+    }
     super.dispose();
   }
 

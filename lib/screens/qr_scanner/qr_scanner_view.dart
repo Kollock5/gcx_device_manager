@@ -13,9 +13,10 @@ class QrScannerScreen extends StatelessWidget {
     final viewmodel = Provider.of<QrScannerViewmodel>(context);
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('ID Scanner'),
+      ),
       body: MobileScanner(
-        // fit: BoxFit.contain,8
         controller: MobileScannerController(
           detectionSpeed: DetectionSpeed.normal,
           facing: CameraFacing.back,
