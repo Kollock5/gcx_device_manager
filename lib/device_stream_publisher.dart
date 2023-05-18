@@ -34,6 +34,18 @@ class DeviceStreamPublisher {
     return result;
   }
 
+  Future<Device?> getDeviceOnce(String id) async {
+    final deviceSnapshot = await _database.child('devices/$id').once();
+    if (deviceSnapshot.snapshot.value != null) {
+      final deviceData = Map<String, dynamic>.from(
+          deviceSnapshot.snapshot.value as Map<dynamic, dynamic>);
+      final device = Device.fromJson(deviceData);
+      return device;
+    } else {
+      return null;
+    }
+  }
+
   void deleteDevice(Device device) {
     final id = device.id;
     _database.child('devices/$id').remove();

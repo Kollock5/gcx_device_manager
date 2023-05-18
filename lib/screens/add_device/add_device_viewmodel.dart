@@ -5,6 +5,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:gcx_device_manager/models/device.dart';
 import 'package:gcx_device_manager/device_stream_publisher.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddDeviceViewmodel extends ChangeNotifier {
   final DeviceStreamPublisher _publisher;
@@ -61,9 +62,15 @@ class AddDeviceViewmodel extends ChangeNotifier {
   Device? get device => _device;
   bool get isAddDeviceButtonDisabled => _isAddDeviceButtonDisabled;
 
+  setSavedId(String newId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('savedId', newId);
+  }
+
   void onAddDevicePressed(BuildContext context) {
     if (_device != null) {
       _publisher.updateDevice(_device!);
+      setSavedId(_device!.id);
       Navigator.pop(context);
     }
   }

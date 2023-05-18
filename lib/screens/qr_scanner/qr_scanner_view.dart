@@ -23,7 +23,16 @@ class QrScannerScreen extends StatelessWidget {
         onDetect: (capture) {
           final List<Barcode> barcodes = capture.barcodes;
           for (final barcode in barcodes) {
-            debugPrint('Barcode found! ${barcode.rawValue}');
+            viewmodel.onBarCodeScanned(context, barcode.rawValue);
+            if (viewmodel.isProcessingScan == false) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: Text('Barcode detected: ${barcode.rawValue}'),
+                  ),
+                );
+            }
           }
         },
       ),

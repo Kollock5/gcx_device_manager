@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
             ),
         '/qrScannerView': (context) =>
             ChangeNotifierProvider<QrScannerViewmodel>(
-              create: (_) => QrScannerViewmodel(),
+              create: (_) => QrScannerViewmodel(DeviceStreamPublisher()),
               child: const QrScannerScreen(),
             ),
         '/settings': (context) => ChangeNotifierProvider<SettingsViewmodel>(
