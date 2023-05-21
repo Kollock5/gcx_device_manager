@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../device_stream_publisher.dart';
+import '../../services/device_database_manager.dart';
 import '../../models/device.dart';
 
 class SettingsViewmodel extends ChangeNotifier {
-  late final DeviceStreamPublisher _publisher;
+  late final DeviceDatabaseManager _publisher;
   Device? _device;
   Device? _updatedDevice;
 
@@ -82,7 +82,6 @@ class SettingsViewmodel extends ChangeNotifier {
   void onSaveUpdatePressed(BuildContext context) {
     if (_updatedDevice != null) {
       if (_device?.id != _updatedDevice?.id) {
-        print(_device?.id != _updatedDevice?.id);
         _publisher.deleteDevice(_device!);
         onSavedIdChanged(_updatedDevice?.id);
       }

@@ -1,12 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:gcx_device_manager/device_stream_publisher.dart';
+import 'package:gcx_device_manager/services/device_database_manager.dart';
 
 import '../../models/device.dart';
 
 class QrScannerViewmodel extends ChangeNotifier {
-  late final DeviceStreamPublisher _publisher;
+  late final DeviceDatabaseManager _publisher;
   bool _isProcessingScan = false; // introduce a flag
 
   QrScannerViewmodel(this._publisher);

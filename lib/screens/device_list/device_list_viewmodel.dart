@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:gcx_device_manager/models/device.dart';
-import 'package:gcx_device_manager/device_stream_publisher.dart';
+import 'package:gcx_device_manager/services/device_database_manager.dart';
 
 class DeviceListViewModel extends ChangeNotifier {
   List<Device>? _devices;
-  final DeviceStreamPublisher _publisher;
+  final DeviceDatabaseManager _publisher;
 
   late StreamSubscription<List<Device>> _deviceStream;
 

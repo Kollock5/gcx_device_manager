@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:gcx_device_manager/device_stream_publisher.dart';
+import 'package:gcx_device_manager/services/device_database_manager.dart';
 import 'package:gcx_device_manager/screens/device_detail/device_detail_view.dart';
 import 'package:gcx_device_manager/screens/device_detail/device_detail_view_model.dart';
 import 'package:gcx_device_manager/screens/device_list/device_list_viewmodel.dart';
@@ -13,7 +13,7 @@ import 'package:gcx_device_manager/screens/settings/settings_view.dart';
 import 'package:gcx_device_manager/screens/settings/settings_viewmodel.dart';
 import 'package:provider/provider.dart';
 
-import 'firebase_options.dart';
+import 'services/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +21,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-    MyApp(),
+    const MyApp(),
   );
 }
 
@@ -38,10 +38,10 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => MyHomePage(),
+        '/': (context) => const MyHomePage(),
         '/deviceListView': (context) =>
             ChangeNotifierProvider<DeviceListViewModel>(
-              create: (_) => DeviceListViewModel(DeviceStreamPublisher()),
+              create: (_) => DeviceListViewModel(DeviceDatabaseManager()),
               child: const DeviceListView(),
             ),
         '/deviceDetailScreen': (context) {
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
               ModalRoute.of(context)!.settings.arguments as String;
           return ChangeNotifierProvider<DeviceDetailViewModel>(
             create: (_) => DeviceDetailViewModel(
-              DeviceStreamPublisher(),
+              DeviceDatabaseManager(),
               deviceId,
             ),
             child: DeviceDetailScreen(deviceId: deviceId),
@@ -57,16 +57,16 @@ class MyApp extends StatelessWidget {
         },
         '/addDeviceView': (context) =>
             ChangeNotifierProvider<AddDeviceViewmodel>(
-              create: (_) => AddDeviceViewmodel(DeviceStreamPublisher()),
+              create: (_) => AddDeviceViewmodel(DeviceDatabaseManager()),
               child: const AddDeviceView(),
             ),
         '/qrScannerView': (context) =>
             ChangeNotifierProvider<QrScannerViewmodel>(
-              create: (_) => QrScannerViewmodel(DeviceStreamPublisher()),
+              create: (_) => QrScannerViewmodel(DeviceDatabaseManager()),
               child: const QrScannerScreen(),
             ),
         '/settings': (context) => ChangeNotifierProvider<SettingsViewmodel>(
-              create: (_) => SettingsViewmodel(DeviceStreamPublisher()),
+              create: (_) => SettingsViewmodel(DeviceDatabaseManager()),
               child: const SettingsScreen(),
             ),
       },
@@ -96,22 +96,22 @@ class MyHomePage extends StatelessWidget {
         body: TabBarView(
           children: [
             ChangeNotifierProvider<DeviceListViewModel>(
-              create: (_) => DeviceListViewModel(DeviceStreamPublisher()),
+              create: (_) => DeviceListViewModel(DeviceDatabaseManager()),
               child: const DeviceListView(),
             ),
             ChangeNotifierProvider<DeviceDetailViewModel>(
               create: (_) => DeviceDetailViewModel(
-                DeviceStreamPublisher(),
+                DeviceDatabaseManager(),
                 null,
               ),
               child: const DeviceDetailScreen(deviceId: null),
             ),
             ChangeNotifierProvider<QrScannerViewmodel>(
-              create: (_) => QrScannerViewmodel(DeviceStreamPublisher()),
+              create: (_) => QrScannerViewmodel(DeviceDatabaseManager()),
               child: const QrScannerScreen(),
             ),
             ChangeNotifierProvider<SettingsViewmodel>(
-              create: (_) => SettingsViewmodel(DeviceStreamPublisher()),
+              create: (_) => SettingsViewmodel(DeviceDatabaseManager()),
               child: const SettingsScreen(),
             ),
           ],

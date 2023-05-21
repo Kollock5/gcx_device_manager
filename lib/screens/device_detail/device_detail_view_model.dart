@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:gcx_device_manager/models/device.dart';
-import 'package:gcx_device_manager/device_stream_publisher.dart';
+import 'package:gcx_device_manager/services/device_database_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:provider/provider.dart';
 
 class DeviceDetailViewModel extends ChangeNotifier {
   String? deviceId;
-  final DeviceStreamPublisher _publisher;
+  final DeviceDatabaseManager _publisher;
   Device? _device;
   StreamSubscription<Device?>? _deviceStream;
   bool hasDefaultName = false;
@@ -41,7 +41,6 @@ class DeviceDetailViewModel extends ChangeNotifier {
   }
 
   void _listenToDevice() {
-    print("steam");
     if (deviceId != null) {
       _deviceStream = _publisher.getDevice(deviceId!).listen((device) {
         _device = device;
