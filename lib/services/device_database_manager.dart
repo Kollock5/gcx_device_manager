@@ -1,9 +1,7 @@
-// device_stream_publisher.dart
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:gcx_device_manager/models/device.dart';
 
-class DeviceStreamPublisher {
+class DeviceDatabaseManager {
   final _database = FirebaseDatabase.instance.ref();
 
   Stream<List<Device>> getDeviceStream() {
