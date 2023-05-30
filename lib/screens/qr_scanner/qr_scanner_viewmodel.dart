@@ -13,9 +13,7 @@ class QrScannerViewmodel extends ChangeNotifier {
     if (_isProcessingScan || RegExp(r'[.#$\[\]]').hasMatch(code)) {
       return;
     }
-
     _isProcessingScan = true;
-
     Device? scannedDevice = await _publisher.getDeviceOnce(code);
     if (scannedDevice != null) {
       await Navigator.pushNamed(

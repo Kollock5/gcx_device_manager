@@ -1,4 +1,3 @@
-// views/device_list_screen.dart
 import 'package:flutter/material.dart';
 import 'package:gcx_device_manager/screens/device_list/device_list_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +24,7 @@ class DeviceListView extends StatelessWidget {
               ],
             ));
           } else {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),

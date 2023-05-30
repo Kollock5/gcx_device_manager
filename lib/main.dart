@@ -21,12 +21,12 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-    const MyApp(),
+    const DeviceManagerApp(),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class DeviceManagerApp extends StatelessWidget {
+  const DeviceManagerApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const MyHomePage(),
+        '/': (context) => const TabNavigation(),
         '/deviceListView': (context) =>
             ChangeNotifierProvider<DeviceListViewModel>(
               create: (_) => DeviceListViewModel(DeviceDatabaseManager()),
@@ -74,8 +74,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class TabNavigation extends StatelessWidget {
+  const TabNavigation({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

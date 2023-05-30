@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:gcx_device_manager/models/device.dart';
 import 'package:gcx_device_manager/services/device_database_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:provider/provider.dart';
 
 class DeviceDetailViewModel extends ChangeNotifier {
   String? deviceId;

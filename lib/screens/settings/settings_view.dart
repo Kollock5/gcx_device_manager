@@ -118,7 +118,7 @@ class DeviceSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      const Text('Local settings:'),
+      const Text('This device database settings:'),
       TextFormField(
         initialValue: viewmodel.device?.id,
         decoration: const InputDecoration(labelText: 'Device Id'),

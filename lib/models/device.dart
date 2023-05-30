@@ -1,10 +1,9 @@
-// models/device.dart
 class Device {
   String id;
   String name;
   String model;
   String systemVersion;
-  String? type;
+  String type;
   String location;
   String homeLocation;
   bool? isRented;
@@ -78,7 +77,7 @@ class Device {
         name.hashCode ^
         model.hashCode ^
         systemVersion.hashCode ^
-        (type?.hashCode ?? 0) ^
+        (type.hashCode) ^
         location.hashCode ^
         homeLocation.hashCode ^
         (isRented?.hashCode ?? 0);
