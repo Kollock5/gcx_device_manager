@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "549457516957",
+    "firebase_url": "https://gcx-device-manager-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "gcx-device-manager",
+    "storage_bucket": "gcx-device-manager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:549457516957:android:325d0445a85e6639763774",
+        "android_client_info": {
+          "package_name": "com.example.gcx_device_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "549457516957-g6623l0qanhvi9bi0o5q02fbnlql75ud.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD22tLr1nOzCeeYIg4JdxJAEKww8K2det0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "549457516957-g6623l0qanhvi9bi0o5q02fbnlql75ud.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "549457516957-88vd2k8d5mlji21pq7mr8lqki8tireo6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gcxDeviceManager"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
